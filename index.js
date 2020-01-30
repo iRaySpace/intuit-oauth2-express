@@ -1,16 +1,21 @@
 const express = require('express');
 const OAuthClient = require('intuit-oauth');
 
-// @configurationsq
+// @configurations
 const PORT = process.env.PORT || 3000;
 const OAUTH_CLIENT_ID = process.env.OAUTH_CLIENT_ID;
 const OAUTH_CLIENT_SECRET = process.env.OAUTH_CLIENT_SECRET;
 
+// @oauthClient
+let oauthClient = null;
+
 // @app
 const app = express();
+
 app.get('/', (req, res) => res.send('intuit-oauth2-express by iRaySpace'));
+
 app.get('/auth', (req, res) => {
-    const oauthClient = new OAuthClient({
+    oauthClient = new OAuthClient({
         clientId: OAUTH_CLIENT_ID,
         clientSecret: OAUTH_CLIENT_SECRET,
         environment: 'sandbox',
@@ -21,8 +26,14 @@ app.get('/auth', (req, res) => {
     });
     res.redirect(authUri);
 });
-app.get('/authRedirect', (req, res) => {
-    res.send('in progress');
+
+app.get('/authRedirect', async (req, res) => {
+    try {
+        const authResponse = await oauthClient.createToken(req.url);
+        res.send(authResponse);
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 
