@@ -5,7 +5,7 @@ const OAuthClient = require('intuit-oauth');
 const PORT = process.env.PORT || 3000;
 const OAUTH_CLIENT_ID = process.env.OAUTH_CLIENT_ID;
 const OAUTH_CLIENT_SECRET = process.env.OAUTH_CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
+const REDIRECT_URI = process.env.REDIRECT_URI; // https://developer.intuit.com/v2/OAuth2Playground/RedirectUrl
 
 // @oauthClient
 let oauthClient = null;
