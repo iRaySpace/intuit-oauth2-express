@@ -1,5 +1,9 @@
 const express = require('express')
-const app = express()
 
+// @configurations
+const PORT = process.env.PORT || 3000;
+
+// @app
+const app = express()
 app.get('/', (req, res) => res.send('intuit-oauth2-express by iRaySpace'));
-app.listen(8000, () => console.log('App listening'));
+app.listen(PORT, () => console.log('App listening'));
