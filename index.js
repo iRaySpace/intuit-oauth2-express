@@ -5,6 +5,7 @@ const OAuthClient = require('intuit-oauth');
 const PORT = process.env.PORT || 3000;
 const OAUTH_CLIENT_ID = process.env.OAUTH_CLIENT_ID;
 const OAUTH_CLIENT_SECRET = process.env.OAUTH_CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
 // @oauthClient
 let oauthClient = null;
@@ -18,8 +19,8 @@ app.get('/auth', (req, res) => {
     oauthClient = new OAuthClient({
         clientId: OAUTH_CLIENT_ID,
         clientSecret: OAUTH_CLIENT_SECRET,
-        environment: 'sandbox',
-        redirectUri: 'https://developer.intuit.com/v2/OAuth2Playground/RedirectUrl'
+        redirectUri: REDIRECT_URI,
+        environment: 'sandbox'
     });
     const authUri = oauthClient.authorizeUri({
         scope: [OAuthClient.scopes.Accounting]
